@@ -11,9 +11,10 @@ const more = document.querySelector('.navigation-more');
 const moreLinks = document.querySelector('.more-links');
 const header = document.querySelector('.topbar');
 const brand = document.querySelector('.brand');
+const updated = document.querySelector('.nav-updated');
 
 function activatePage() {
-  const requested = window.location.hash.slice(1);
+  const requested = window.location.hash.slice(1).split('?')[0];
   const current = Object.hasOwn(pageNames, requested) ? requested : 'overview';
   if (requested !== current) {
     window.history.replaceState(null, '', `#${current}`);
@@ -34,8 +35,9 @@ function fitNavigation() {
   for (const link of links) linksContainer.append(link);
   more.hidden = true;
   const style = getComputedStyle(header);
+  const updateSpace = getComputedStyle(updated).position === 'absolute' ? 0 : updated.getBoundingClientRect().width + parseFloat(style.columnGap);
   const available = header.clientWidth - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight)
-    - brand.getBoundingClientRect().width - parseFloat(style.columnGap);
+    - brand.getBoundingClientRect().width - parseFloat(style.columnGap) - updateSpace;
   if (linksContainer.getBoundingClientRect().width > available) {
     more.hidden = false;
     for (const link of [...links].reverse()) {
