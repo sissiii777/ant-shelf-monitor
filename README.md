@@ -22,6 +22,12 @@ npm test
 
 ## 发布
 
+### GitHub Pages 快照
+
+运行 `npm run build:pages` 生成 `docs/` 静态快照并提交。仓库 Settings → Pages → Source 选择 Deploy from a branch，分支 `main`，目录 `/docs`。快照使用已有名单数据，实时取数接口不在 GitHub Pages 上运行。更新快照后需重新构建并推送 `docs/`。
+
+### 完整后台版本
+
 当前运行于 Sites，发布权限由 Sites 管理。源码同步到 GitHub 不会自动触发 Sites 部署。可将构建产物部署至支持 Worker ESM 的运行环境；GitHub Pages 仅支持静态页面，不能执行本项目后台。
 
 仓库以 `public/data/shelves.json.gz` 保存页面使用的解析快照，构建时自动解压为JSON。不包含原始业务 Excel、批量净值下载缓存或访问凭证。运行环境凭证应单独配置，不能放入浏览器代码。

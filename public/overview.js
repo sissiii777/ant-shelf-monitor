@@ -165,9 +165,10 @@ async function load() {
   const root = document.getElementById('overview');
   root.innerHTML = '<div class="load-state" role="status">正在读取货架名单…</div><div class="metrics-grid" aria-hidden="true">' + '<div class="skeleton"></div>'.repeat(5) + '</div>';
   try {
-    const response = await fetch('./data/shelves.json');
+    const compressed = document.documentElement.dataset.snapshot === 'gzip';
+    const response = await fetch(compressed ? './data/shelves.json.gz' : './data/shelves.json');
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    dataset = await response.json();
+    dataset = compressed ? await new Response(response.body.pipeThrough(new DecompressionStream('gzip'))).json() : await response.json();
     if (!Array.isArray(dataset.products) || !Array.isArray(dataset.relations)) throw new Error('名单格式异常');
     const updated = document.getElementById('navUpdated');
     const importedAt = new Date(dataset.meta.importedAt);
