@@ -1,0 +1,9 @@
+{
+  "name": "ant-shelf-monitor",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "node --test tests/worker.test.mjs"
+  }
+}

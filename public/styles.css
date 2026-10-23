@@ -1,0 +1,138 @@
+:root {
+  color-scheme: light;
+  --brand: #1677FF;
+  --brand-text: #0958D9;
+  --action-primary: #0969DA;
+  --action-hover: #0958D9;
+  --brand-soft: #EAF3FF;
+  --brand-border: #B7D5FF;
+  --bg-canvas: #F5F7FB;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #F7F9FC;
+  --text-primary: #1D2129;
+  --text-secondary: #4E5969;
+  --text-muted: #6B7280;
+  --border: #E8EDF4;
+  --border-control: #CBD5E1;
+  --radius-card: 20px;
+  --radius-control: 8px;
+  --radius-pill: 999px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --topbar-height: 72px;
+  --nav-height: 40px;
+  --content-max: 1840px;
+  --font-brand: 20px;
+  --font-nav: 16px;
+  --line-brand: 28px;
+  --line-body: 24px;
+  --transition: 140ms;
+  --layer-header: 100;
+  --layer-dropdown: 300;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+  background: var(--bg-canvas);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; }
+[hidden] { display: none !important; }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--brand-text); outline-offset: 2px; }
+
+.topbar {
+  position: sticky;
+  top: 0;
+  z-index: var(--layer-header);
+  display: flex;
+  align-items: center;
+  gap: var(--space-12);
+  height: var(--topbar-height);
+  padding-inline: var(--space-8);
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  font-size: var(--font-brand);
+  font-weight: 700;
+  line-height: var(--line-brand);
+  white-space: nowrap;
+  border-radius: var(--space-1);
+}
+
+.brand-logo {
+  display: block;
+  flex-shrink: 0;
+  width: var(--font-brand);
+  height: var(--font-brand);
+  object-fit: contain;
+}
+
+.navigation { display: flex; align-items: center; min-width: 0; }
+.navigation-links { display: flex; align-items: center; gap: var(--space-2); }
+.nav-link,
+.navigation-more summary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  height: var(--nav-height);
+  padding-inline: var(--space-4);
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  font-size: var(--font-nav);
+  font-weight: 400;
+  line-height: var(--line-body);
+  white-space: nowrap;
+  transition: color var(--transition), background-color var(--transition);
+}
+
+.nav-link:hover,
+.navigation-more summary:hover { background: var(--bg-subtle); color: var(--brand-text); }
+.nav-link[aria-current="page"] { color: var(--brand-text); background: var(--brand-soft); font-weight: 600; }
+.nav-link:active { background: var(--brand-soft); }
+.navigation-more { position: relative; }
+.navigation-more summary { cursor: pointer; list-style: none; gap: var(--space-2); }
+.navigation-more summary::-webkit-details-marker { display: none; }
+.navigation-more summary svg { width: var(--space-4); height: var(--space-4); stroke: currentColor; stroke-width: 1.5; }
+.navigation-more[data-active="true"] summary { color: var(--brand-text); background: var(--brand-soft); font-weight: 600; }
+.more-links {
+  position: absolute;
+  top: calc(100% + var(--space-3));
+  right: 0;
+  z-index: var(--layer-dropdown);
+  min-width: 128px;
+  padding: var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-control);
+  background: var(--bg-surface);
+  box-shadow: 0 8px 28px rgba(29, 33, 41, .12);
+}
+.more-links .nav-link { width: 100%; justify-content: flex-start; border-radius: var(--radius-control); }
+.page-container { max-width: var(--content-max); margin-inline: auto; padding: var(--space-8); }
+.page { min-height: calc(100dvh - var(--topbar-height) - 2 * var(--space-8)); }
+
+@media (max-width: 1439px) {
+  .page-container { padding: var(--space-6); }
+  .page { min-height: calc(100dvh - var(--topbar-height) - 2 * var(--space-6)); }
+}
+@media (max-width: 767px) {
+  .topbar { padding-inline: var(--space-4); gap: var(--space-6); }
+  .page-container { padding: var(--space-4); }
+  .page { min-height: calc(100dvh - var(--topbar-height) - 2 * var(--space-4)); }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+}
